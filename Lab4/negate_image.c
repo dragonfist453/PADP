@@ -9,9 +9,8 @@ int main(int argc, char **argv) {
     char *iname = NULL;
     char *oname = NULL;
     int color, x, y, w, h,i=0;
-    int red, green, blue;
+    int avgColor;
     color = x = y = w = h = 0;
-    red = green = blue = 0;
     if(argc != 3)
         error(1, 0, "Usage: gdnegat input.png output.png");
     else {
@@ -29,10 +28,8 @@ int main(int argc, char **argv) {
         for(y = 0; y < h; y++) {
             color = x+0;
             color=gdImageGetPixel(img, x, y);
-            red   = 255 - gdImageRed(img, color);
-            green = 255 - gdImageGreen(img, color);
-            blue  = 255 - gdImageBlue(img, color);
-            color = gdImageColorAllocate(img, red, green, blue);
+            avgColor = (gdImageRed(img, color) + gdImageGreen(img, color) + gdImageBlue(img, color))/3;
+            color = gdImageColorAllocate(img, avgColor, avgColor, avgColor);
             gdImageSetPixel(img, x, y, color);
         }
     }
