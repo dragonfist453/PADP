@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
   double x, y, pi, sum;
   double start, end;
   for(nthreads = 1; nthreads <= 8; nthreads*=2) {
-    for(n=10000;n<=50000;n+=10000) {
+    for(n=10000;n<=10000000;n*=10) {
         sum = 0.0;
         omp_set_num_threads(nthreads);
         start = omp_get_wtime();

@@ -24,12 +24,14 @@ int main(int argc, char **argv) {
     w = gdImageSX(img);
     h = gdImageSY(img);
     double t = omp_get_wtime();
+    #pragma omp parallel for schedule(guided) private(x,y,color)
     for(x = 0; x < w; x++) {
         for(y = 0; y < h; y++) {
             color = x+0;
-            color=gdImageGetPixel(img, x, y);
+            color = gdImageGetPixel(img, x, y);
             avgColor = (gdImageRed(img, color) + gdImageGreen(img, color) + gdImageBlue(img, color))/3;
             color = gdImageColorAllocate(img, avgColor, avgColor, avgColor);
+            #pragma omp critical
             gdImageSetPixel(img, x, y, color);
         }
     }
