@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
     int avgColor;
     color = x = y = w = h = 0;
     if(argc != 3)
-        error(1, 0, "Usage: gdnegat input.png output.png");
+        error(1, 0, "Usage: %s input.png output.png",argv[0]);
     else {
         iname = argv[1];
         oname = argv[2];
